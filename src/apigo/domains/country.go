@@ -41,7 +41,8 @@ func (country *Country) Get() *utils.Apierror {
 	url := fmt.Sprintf("%s%s", utils.UrlCountry, country.ID)
 
 
-	response, err := http.Get(url)
+
+	response, err :=utils.Client.Get(url)
 
 	if err != nil {
 
@@ -97,7 +98,7 @@ func (country *Country) GetWG(wg *sync.WaitGroup, apierror *utils.Apierror) {
 
 	url := fmt.Sprintf("%s%s", utils.UrlCountry, country.ID)
 
-	response, err := http.Get(url)
+	response, err :=utils.Client.Get(url)
 
 
 	if err != nil {
@@ -153,7 +154,7 @@ func GetChanCountry(country Country, result chan Result, erc chan *utils.Apierro
 
 	url := fmt.Sprintf("%s%s", utils.UrlCountry, country.ID)
 
-	response, err := http.Get(url)
+	response, err :=utils.Client.Get(url)
 
 	if err != nil {
 

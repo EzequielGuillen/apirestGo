@@ -54,7 +54,7 @@ func (site *Site) Get() *utils.Apierror {
 
 	url := fmt.Sprintf("%s%s", utils.UrlSite, site.ID)
 
-	response, err := http.Get(url)
+	response, err :=utils.Client.Get(url)
 
 
 	if err != nil {
@@ -112,7 +112,7 @@ func (site *Site) GetWG(wg *sync.WaitGroup, apierror *utils.Apierror) {
 
 	url := fmt.Sprintf("%s%s", utils.UrlSite, site.ID)
 
-	response, err := http.Get(url)
+	response, err :=utils.Client.Get(url)
 
 	if err != nil {
 
@@ -166,7 +166,7 @@ func GetChanSite(site Site, result chan Result, erc chan *utils.Apierror)  {
 
 	url := fmt.Sprintf("%s%s", utils.UrlSite, site.ID)
 
-	response, err := http.Get(url)
+	response, err :=utils.Client.Get(url)
 
 
 	if err != nil {

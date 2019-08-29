@@ -2,11 +2,15 @@ package utils
 
 import (
 	"../circuitbreaker"
+	"fmt"
 	"net/http"
 	"time"
 )
 
 var (
+	Client = http.Client{
+		Timeout: 3*time.Second,
+	}
 	CircuitBreaker = circuitbreaker.CircuitBreaker{
 		State:      "CLOSE",
 		CantErrors: 3,
@@ -19,15 +23,18 @@ func TimeOut() {
 		CircuitBreaker.State = "OPEN"
 		time.Sleep(CircuitBreaker.TimeOut)
 		CircuitBreaker.State = "HALFOPEN"
-		response, err := http.Get(UrlCountryPing)
+		fmt.Println("Si")
+
+		response, err :=Client.Get(UrlCountryPing)
 		if err != nil || response.StatusCode == 500 {
 			continue
 		}
-		response, err = http.Get(UrlUserPing)
+
+		response, err =Client.Get(UrlUserPing)
 		if err != nil || response.StatusCode == 500 {
 			continue
 		}
-		response, err = http.Get(UrlSitePing)
+		response, err = Client.Get(UrlSitePing)
 		if err != nil || response.StatusCode ==  500{
 			continue
 		}
